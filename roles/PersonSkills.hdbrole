@@ -1,0 +1,6 @@
+role public.Flexso.roles::PersonSkills
+{
+
+application privilege: "public.Flexso::personskills";
+
+}
