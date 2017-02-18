@@ -1,0 +1,38 @@
+namespace public.Flexso;
+@Schema : 'LEMAIWO'
+
+context PersonSkills {
+
+ @Catalog.tableType : #COLUMN
+ entity Person {
+   key id  : Integer;
+   Firstname  : String(80);
+   Lastname  : String(80);
+   Birthdate : LocalDate;
+   Skills: Association[*] to PersonSkills on Skills.PersonId = id;
+ };
+ 
+ @Catalog.tableType : #COLUMN
+ entity Skills {
+   key id  : Integer;
+   Name  : String(80);
+ };
+ 
+ @Catalog.tableType : #COLUMN
+ entity PersonSkills {
+   key PersonId  : Integer;
+   key SkillId  : Integer;
+   SkillName: Association[1] to Skills on SkillName.id = SkillId;
+   Score  : Integer;
+ };
+ 
+view SkillsView as select from Person{
+  Person.id as PersonId,
+  Person.Firstname,
+  Person.Lastname,
+  Person.Birthdate,
+  Person.Skills.SkillId,
+  Person.Skills.SkillName.Name,
+  Person.Skills.Score
+};
+};
