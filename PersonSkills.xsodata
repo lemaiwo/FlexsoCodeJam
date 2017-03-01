@@ -1,0 +1,9 @@
+service{
+    "LEMAIWO"."public.Flexso::PersonSkills.Person" as "Person" navigates ("Person_Skills" as "Skills"); 
+    "LEMAIWO"."public.Flexso::PersonSkills.PersonSkills" as "SkillScore"  navigates ("Skill_Details" as "SkillDetails","Person_Details" as "PersonDetails"); 
+    "LEMAIWO"."public.Flexso::PersonSkills.Skills" as "SkillDetails" ;
+    
+    association "Person_Skills" principal "Person"("id") multiplicity "1" dependent "SkillScore"("PersonId") multiplicity "*";
+    association "Skill_Details" principal "SkillScore"("SkillId") multiplicity "1" dependent "SkillDetails"("id") multiplicity "1";
+    association "Person_Details" principal "SkillScore"("PersonId") multiplicity "1" dependent "Person"("id") multiplicity "1";
+}
